@@ -1,3 +1,4 @@
+
 import random
 import typing
 
@@ -23,8 +24,8 @@ def gen_event() -> typing.Generator[tuple[str, str], None, None]:
 
 
 def consume_event(
-        events: list[tuple[str, str]]
-        ) -> typing.Generator[tuple[str, str], None, None]:
+    events: list[tuple[str, str]]
+) -> typing.Generator[tuple[str, str], None, None]:
     while len(events) > 0:
         index = random.randrange(len(events))
         event = events[index]
