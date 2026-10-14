@@ -1,3 +1,4 @@
+
 import random
 
 
@@ -19,22 +20,24 @@ ACHIEVEMENTS = [
 ]
 
 
-def gen_player_achievements() -> set:
+def gen_player_achievements() -> set[str]:
     amount = random.randint(5, 10)
     return set(random.sample(ACHIEVEMENTS, amount))
 
 
 def unique_achievements(
-    player1: set, player2: set, player3: set, player4: set
-) -> set:
+    player1: set[str], player2: set[str],
+    player3: set[str], player4: set[str]
+) -> set[str]:
     unique_ach = player1.union(player2, player3, player4)
-    print(f"All unique achievements: {unique_ach}")
+    print(f"All distinct achievements: {unique_ach}")
     print(f"Total unique achievements: {len(unique_ach)}\n")
     return unique_ach
 
 
 def rare_achievements(
-    player1: set, player2: set, player3: set, player4: set
+    player1: set[str], player2: set[str],
+    player3: set[str], player4: set[str]
 ) -> None:
     print(
         f"Only Alice has: "
@@ -61,22 +64,22 @@ def ft_achievement_tracker() -> None:
     dylan = gen_player_achievements()
 
     print("=== Achievement Tracker System ===\n")
-    print(f"Player Alice achievements: {alice}")
-    print(f"Player Bob achievements: {bob}")
-    print(f"Player Charlie achievements: {charlie}")
-    print(f"Player Dylan achievements: {dylan}\n")
+    print(f"Player Alice: {alice}")
+    print(f"Player Bob: {bob}")
+    print(f"Player Charlie: {charlie}")
+    print(f"Player Dylan: {dylan}\n")
 
     print("=== Achievement Analytics ===")
 
-    all_ach = unique_achievements(alice, bob, charlie, dylan)
-
+    unique_achievements(alice, bob, charlie, dylan)
     print(
-        f"Common to all players: "
+        "Common achievements: "
         f"{alice.intersection(bob, charlie, dylan)}\n"
     )
 
     rare_achievements(alice, bob, charlie, dylan)
 
+    all_ach = set(ACHIEVEMENTS)
     print(f"Alice is missing: {all_ach.difference(alice)}")
     print(f"Bob is missing: {all_ach.difference(bob)}")
     print(f"Charlie is missing: {all_ach.difference(charlie)}")
