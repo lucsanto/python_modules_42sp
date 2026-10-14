@@ -23,3 +23,4 @@ def ft_command_quest() -> None:
 
 if __name__ == "__main__":
     ft_command_quest()
+    
