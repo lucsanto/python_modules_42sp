@@ -1,4 +1,6 @@
+
 import math
+
 
 def get_player_pos() -> tuple[float, float, float]:
     while True:
@@ -7,43 +9,32 @@ def get_player_pos() -> tuple[float, float, float]:
         )
 
         try:
-            x, y, z = coordinates.split(",")
+            x_text, y_text, z_text = coordinates.split(",")
         except ValueError:
             print("Invalid syntax")
             continue
 
         try:
-            x = float(x)
-            y = float(y)
-            z = float(z)
+            x = float(x_text)
+            y = float(y_text)
+            z = float(z_text)
         except ValueError as error:
-            print(error)
+            print(f"Error on parameter: {error}")
             continue
 
-        return(x, y, z)
+        return (x, y, z)
+
 
 def ft_coordinates_system(
     first_pos: tuple[float, float, float],
     second_pos: tuple[float, float, float]
-) -> None:
-    distance_center = math.sqrt(
-        first_pos[0] ** 2
-        + first_pos[1] ** 2
-        + first_pos[2] ** 2
-    )
-
-    print(f"Distance to center: {round(distance_center, 4)}")
-
-    distance_between = math.sqrt(
+) -> float:
+    distance = math.sqrt(
         (second_pos[0] - first_pos[0]) ** 2
         + (second_pos[1] - first_pos[1]) ** 2
         + (second_pos[2] - first_pos[2]) ** 2
     )
-
-    print(
-        "Distance between the 2 sets of coordinates: "
-        f"{round(distance_between, 4)}"
-    )
+    return distance
 
 
 def main() -> None:
@@ -59,10 +50,18 @@ def main() -> None:
         f"Z={first_pos[2]}"
     )
 
+    center = (0.0, 0.0, 0.0)
+    distance_center = ft_coordinates_system(first_pos, center)
+    print(f"Distance to center: {round(distance_center, 4)}")
+
     print("\nGet a second set of coordinates")
     second_pos = get_player_pos()
 
-    ft_coordinates_system(first_pos, second_pos)
+    distance_between = ft_coordinates_system(first_pos, second_pos)
+    print(
+        "Distance between the 2 sets of coordinates: "
+        f"{round(distance_between, 4)}"
+    )
 
 
 if __name__ == "__main__":
