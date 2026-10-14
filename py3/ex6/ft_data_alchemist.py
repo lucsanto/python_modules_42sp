@@ -1,3 +1,4 @@
+
 import random
 
 
@@ -23,20 +24,17 @@ def main() -> None:
     capitalized_only = [p for p in players if p == p.capitalize()]
     print(f"New list of capitalized names only: {capitalized_only}\n")
 
-    score_dict = {
-        player: random.randrange(0, 1000)
-        for player in capitalized_list
-    }
+    score_dict = {p: random.randrange(0, 1000) for p in capitalized_list}
     print(f"Score dict: {score_dict}")
+
+    if len(score_dict) == 0:
+        print("No players to analyze")
+        return
 
     score_average = sum(score_dict.values()) / len(score_dict)
     print(f"Score average is {round(score_average, 2)}")
 
-    high_scores = {
-        player: score_dict[player]
-        for player in score_dict
-        if score_dict[player] > score_average
-    }
+    high_scores = {p: s for p, s in score_dict.items() if s > score_average}
     print(f"High scores: {high_scores}")
 
 
